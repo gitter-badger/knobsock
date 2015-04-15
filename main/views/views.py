@@ -1,5 +1,12 @@
 
-from django import http
+import webapp2
 
-def home(request):
-    return http.HttpResponse('KnobSock in this bish')
+class Home(webapp2.RequestHandler):
+	def get(self):
+		self.response.headers['Content-Type'] = 'text/plain'
+		self.response.write('Knobsock in this bish')
+
+
+app = webapp2.WSGIApplication([
+    ('/', Home),
+], debug=True)
