@@ -1,1 +1,0 @@
-LOCAL_APPS = ['main']

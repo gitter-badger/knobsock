@@ -6,7 +6,7 @@ threadsafe: true
 
 handlers:
 - url: .*
-  script: main.views.views.app
+  script: main.views.app
 
 libraries:
 - name: django
