@@ -1,13 +1,21 @@
-application: knobsock1
+application: knobsock
 version: 1
 runtime: python27
-api_version: 1
 threadsafe: true
+api_version: 1
 
 handlers:
-- url: .*
-  script: main.views.app
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
 
-libraries:
-- name: django
-  version: 1.5
+- url: /rest/.*
+  script: main.APP
+
+- url: (.*)/
+  static_files: app\1/index.html
+  upload: app
+
+- url: (.*)
+  static_files: app\1
+  upload: app
