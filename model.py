@@ -6,7 +6,7 @@ class Group(ndb.Model):
 
 class Knob(ndb.Model):
   name = ndb.StringProperty()
-  parent = ndb.KeyProperty()
+  parent = ndb.StructuredProperty(Group)
   timeout = ndb.DateTimeProperty()
   sock = ndb.BooleanProperty()
 
