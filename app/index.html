@@ -1,14 +1,28 @@
 <!doctype html>
-<html ng-app="App">
+<html ng-app="KnobSock">
   <head>
     <link rel="stylesheet" href="/css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-route.js"></script>
     <script src="/js/app.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://bootswatch.com/paper/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+
+    
   </head>
   <body>
-    <h1>AngularJS Guest List</h1> 
-    <pre class="status" ng-bind="status"></pre>
-    <div ng-view></div>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <!-- VIEWS ARE INSERTED BELOW -->
+        <div ng-view></div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </body>
 </html>
