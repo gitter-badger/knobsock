@@ -1,14 +1,15 @@
 import json
 import webapp2
 import time
+import google.appengine.api.users as users
 
 import model
 
 
-def AsDict(guest):
-  return {'id': guest.key.id(), 'first': guest.first, 'last': guest.last}
+def UserAsDict(user, is_admin):
+  return {'id': user.user_id(), 'email': user.email(), 'admin': is_admin}
 
-
+# parent handler class 
 class RestHandler(webapp2.RequestHandler):
 
   def dispatch(self):
@@ -20,6 +21,21 @@ class RestHandler(webapp2.RequestHandler):
     self.response.headers['content-type'] = 'text/plain'
     self.response.write(json.dumps(r))
     
+
+class UserHandler(RestHandler):
+
+  def get(self):
+    if "login" in self.request.path:
+      self.redirect(users.create_login_url())
+    elif "logout" in self.request.path:
+      self.redirect(users.create_logout_url('/'))
+    else:
+        user = users.get_current_user()
+        if user:
+          self.SendJson(UserAsDict(user, users.is_current_user_admin()))
+        else:
+          self.SendJson({user: None})
+
 
 class QueryHandler(RestHandler):
 
@@ -55,10 +71,11 @@ class DeleteHandler(RestHandler):
 
 
 APP = webapp2.WSGIApplication([
-    ('/rest/query', QueryHandler),
-    ('/rest/insert', InsertHandler),
-    ('/rest/delete', DeleteHandler),
-    ('/rest/update', UpdateHandler),
+    ('/api/query', QueryHandler),
+    ('/api/insert', InsertHandler),
+    ('/api/delete', DeleteHandler),
+    ('/api/update', UpdateHandler),
+    (r'/api/user/.*', UserHandler)
 ], debug=True)
 
 
